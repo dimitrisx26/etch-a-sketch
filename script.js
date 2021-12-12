@@ -1,13 +1,19 @@
 const container = document.querySelector("#container");
 let rows = document.getElementsByClassName("rows");
 let cell = document.getElementsByClassName("cell");
-const btn = document.querySelector("button")
+const btn = document.querySelector(".btn");
+const btn16 = document.querySelector(".btn16");
+const btn32 = document.querySelector(".btn32");
+const btn64 = document.querySelector(".btn64");
 
-let cellsNum = gridSize();
+let cellsNum = 16;
+createGrid(cellsNum);
 
 function createGrid(cellNum) {
     createRows(cellNum);
     createColumns(cellNum);
+    resizeGrid(cellNum);
+    hoverCell();
 }
 
 function createRows(rowNum) {
@@ -35,24 +41,29 @@ function hoverCell() {
     }
 }
 
-
-
-function gridSize(btn) {
-    let cellNum = 110;
-    while (cellNum > 100) {
-        cellNum = prompt("How many squares per side for the new grid, max 100!");
+function resizeGrid(cellNum) {
+    for (let i = 0; i < cell.length; i++) {
+        cell[i].classList.add("cell" + cellNum);
     }
-
-    return cellNum;
 }
 
 btn.addEventListener("click", function () {
     for (let i = 0; i < cell.length; i++) {
         cell[i].classList.remove("hovered");
-        
     }
 })
 
+btn16.addEventListener("click", function () {
+    container.innerHTML = "";
+    createGrid(16);
+})
 
-createGrid(cellsNum);
-hoverCell();
+btn32.addEventListener("click", function () {
+    container.innerHTML = "";
+    createGrid(32);
+})
+
+btn64.addEventListener("click", function () {
+    container.innerHTML = "";
+    createGrid(64);
+})
